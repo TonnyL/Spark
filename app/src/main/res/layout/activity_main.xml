@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="io.github.tonnyl.sparksample.MainActivity">
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/instagram_text_logo"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="32dp"
+        android:alpha="0.3"
+        android:background="@android:color/white"
+        android:clickable="false"
+        android:focusable="false"
+        android:hint="Username"
+        android:padding="16dp" />
+
+
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0.3"
+        android:background="@android:color/white"
+        android:clickable="false"
+        android:focusable="false"
+        android:hint="Password"
+        android:padding="16dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0.3"
+        android:textColor="@android:color/white"
+        android:background="@drawable/bg_login_button"
+        android:hint="Log in" />
+
+    <TextView
+        android:id="@+id/login_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:alpha="0.2"
+        android:text="Forget your login details? Get help signing in"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
