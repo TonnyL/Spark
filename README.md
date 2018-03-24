@@ -1,4 +1,7 @@
-# Spark(Work-in-progress)
+# Spark
+[![Build Status](https://travis-ci.org/TonnyL/Spark.svg?branch=master)](https://travis-ci.org/TonnyL/Spark)
+[![Download](https://api.bintray.com/packages/tonnyl/maven/spark/images/download.svg) ](https://bintray.com/tonnyl/maven/spark/_latestVersion)
+
 Create gradient animations like Instagram&Spotify.
 
 # Screenshots
@@ -8,22 +11,60 @@ Create gradient animations like Instagram&Spotify.
 
 ## Usage
 ```kotlin
-override fun onCreate(savedInstanceState: Bundle?) {
-	super.onCreate(savedInstanceState)
-	setContentView(R.layout.activity_main)
-	
-	val spark = Spark.Builder()
-	        .setView(frameLayout) // View or view group
-	        .setDuration(4000)
-	        .setAnimList(Spark.ANIM_GREEN_PURPLE)
-	        .build()
+private lateinit var mSpark: Spark
 
-	spark.startAnimation()
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+
+    mSpark = Spark.Builder()
+            .setView(frameLayout) // View or view group
+            .setDuration(4000)
+            .setAnimList(Spark.ANIM_GREEN_PURPLE)
+            .build()
+
+}
+
+override fun onResume() {
+    super.onResume()
+
+    mSpark.startAnimation()
+}
+
+override fun onPause() {
+    super.onPause()
+
+    mSpark.stopAnimation()
 }
 ```
 
 ## Installation
-It will be published on jcenter in the future.
+### Gradle
++ Add the JitPack repository to your **root** `build.gradle` file:
+
+```gradle
+repositories {
+    maven { url "https://jitpack.io" }
+}
+```
+
++ Add the code to your **module**'s `build.gradle` file:
+
+```gradle
+dependencies {
+    implementation 'io.github.tonnyl:spark:x.y.z'
+}
+```
+
+### Maven
+```xml
+<dependency>
+  <groupId>io.github.tonnyl</groupId>
+  <artifactId>spark</artifactId>
+  <version>x.y.z</version>
+  <type>pom</type>
+</dependency>
+```
 
 ## Custom Gradient Colors
 ### Create gradient drawables
@@ -84,12 +125,11 @@ It will be published on jcenter in the future.
 
 ### Apply your custom animation list
 ```kotlin
-Spark.Builder()
-    .setView(frameLayout) // View or view group
-    .setDuration(4000)
-    .setAnimList(Spark.ANIM_GREEN_PURPLE)
-    .build()
-    .startAnimation()
+mSpark = Spark.Builder()
+        .setView(frameLayout) // View or view group
+        .setDuration(4000)
+        .setAnimList(Spark.ANIM_GREEN_PURPLE) // Your custom animation list
+        .build()
 ```
 
 For the colors, I referred to [Alexander Zaytsev](https://dribbble.com/anwaltzzz)'s [shot](https://dribbble.com/shots/3380672-Sketch-Gradients-Freebie) on Dribbble.

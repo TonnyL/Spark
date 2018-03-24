@@ -49,6 +49,11 @@ repositories {
     mavenCentral()
 }
 
+// Disable creating javadocs
+tasks.withType(Javadoc) {
+    enabled = false
+}
+
 // Type these code in a single line to upload the library to jfrog.
 // jcenter configuration for novoda's bintray-release
 // $ ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false

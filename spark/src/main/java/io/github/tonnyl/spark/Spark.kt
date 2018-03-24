@@ -8,9 +8,11 @@ import android.view.View
  *
  * Create a background animation like instagram.
  */
-class Spark private constructor(private val mDuration: Int,
-                                private val mView: View?,
-                                private val mAnimList: Int) {
+class Spark private constructor(
+        private val mDuration: Int,
+        private val mView: View?,
+        private val mAnimList: Int
+) {
 
     companion object {
         @JvmField
@@ -24,30 +26,42 @@ class Spark private constructor(private val mDuration: Int,
     private constructor(builder: Builder) :
             this(builder.duration, builder.view, builder.animList)
 
+    private var mBackgroundAnimationDrawable: AnimationDrawable? = null
+
     fun startAnimation() {
 
         mView?.let {
             it.setBackgroundResource(mAnimList)
-            val background = it.background as AnimationDrawable
+            mBackgroundAnimationDrawable = it.background as AnimationDrawable
 
-            background.setEnterFadeDuration(mDuration)
-            background.setExitFadeDuration(mDuration)
+            mBackgroundAnimationDrawable?.setEnterFadeDuration(mDuration)
+            mBackgroundAnimationDrawable?.setExitFadeDuration(mDuration)
 
-            it.background = background
+            it.background = mBackgroundAnimationDrawable
             it.post {
-                background.start()
+                mBackgroundAnimationDrawable?.start()
             }
         } ?: run {
             throw IllegalStateException("view must be initialized")
         }
     }
 
+    fun stopAnimation() {
+
+        if (mView != null && mBackgroundAnimationDrawable?.isRunning == true) {
+            mBackgroundAnimationDrawable?.stop()
+        }
+
+    }
+
     class Builder {
 
         var duration: Int = 4000
             private set
+
         var view: View? = null
             private set
+
         var animList: Int = ANIM_GREEN_PURPLE
             private set
 
@@ -67,6 +81,7 @@ class Spark private constructor(private val mDuration: Int,
         }
 
         fun build() = Spark(this)
+
     }
 
 }
