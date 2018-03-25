@@ -14,8 +14,7 @@ Create gradient animations like Instagram&Spotify.
 private lateinit var mSpark: Spark
 
 override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
+    // ...
 
     mSpark = Spark.Builder()
             .setView(frameLayout) // View or view group
@@ -26,14 +25,12 @@ override fun onCreate(savedInstanceState: Bundle?) {
 }
 
 override fun onResume() {
-    super.onResume()
-
+    // ...
     mSpark.startAnimation()
 }
 
 override fun onPause() {
-    super.onPause()
-
+    // ...
     mSpark.stopAnimation()
 }
 ```
@@ -104,7 +101,7 @@ dependencies {
 </shape>
 ```
 
-### Create the animation list
+### Create the Animation List
 `custom_anim_list.xml`
 
 ```xml
@@ -123,18 +120,19 @@ dependencies {
 </animation-list>
 ```
 
-### Apply your custom animation list
+### Apply Your Custom Animation List
 ```kotlin
 mSpark = Spark.Builder()
-        .setView(frameLayout) // View or view group
-        .setDuration(4000)
-        .setAnimList(Spark.ANIM_GREEN_PURPLE) // Your custom animation list
-        .build()
+        // ...
+        .setAnimList(R.drawable.custom_anim_list) // Your custom animation 
+        // ...
 ```
 
-For the colors, I referred to [Alexander Zaytsev](https://dribbble.com/anwaltzzz)'s [shot](https://dribbble.com/shots/3380672-Sketch-Gradients-Freebie) on Dribbble.
+## Thanks
+
+Designed by [Alexander Zaytsev](https://dribbble.com/anwaltzzz).
 
 ![Sketch Gradients](./art/Sketch_Gradients.png)
 
 ## License
-Charles is under the MIT license. See the [LICENSE](LICENSE) for more information.
+Spark is under the MIT license. See the [LICENSE](LICENSE) for more information.
