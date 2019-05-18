@@ -1,20 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.novoda.bintray-release'
-
-def configuration = rootProject.ext.configuration
-def libraries = rootProject.ext.libraries
+apply plugin: 'kotlin-kapt'
+apply plugin: "guru.stefma.bintrayrelease"
 
 android {
-    compileSdkVersion configuration.compileSdkVersion
-    buildToolsVersion configuration.buildToolsVersion
+    compileSdkVersion versions.compile_sdk
 
     defaultConfig {
-        minSdkVersion configuration.minSdkVersion
-        targetSdkVersion configuration.targetSdkVersion
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion versions.min_sdk
+        targetSdkVersion versions.target_sdk
     }
 
     buildTypes {
@@ -37,31 +31,22 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    testImplementation "junit:junit:${libraries.junitVersion}"
-
-    androidTestImplementation "com.android.support.test:runner:${libraries.androidTestRunnerRulesVersion}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:${libraries.espressoVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+    implementation "androidx.appcompat:appcompat:${versions.app_compat}"
 }
 
 repositories {
     mavenCentral()
 }
 
-// Disable creating javadocs
-tasks.withType(Javadoc) {
-    enabled = false
+// ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
+version = "0.1.0"
+group = "io.github.tonnyl"
+androidArtifact {
+    artifactId = "spark"
 }
-
-// Type these code in a single line to upload the library to jfrog.
-// jcenter configuration for novoda's bintray-release
-// $ ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
 publish {
-    userOrg = 'tonnyl'
-    groupId = 'io.github.tonnyl'
-    artifactId = 'spark'
-    publishVersion = '0.1.0-alpha'
-    desc = 'An Android library to create gradient animation like Instagram&Spotify'
-    website = 'https://github.com/TonnyL/Spark'
+    userOrg = "tonnyl"
+    desc = "An Android library to create gradient animation like Instagram&Spotify"
+    website = "https://github.com/TonnyL/Spark"
 }
