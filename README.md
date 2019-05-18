@@ -11,42 +11,25 @@ Create gradient animations like Instagram&Spotify.
 
 ## Usage
 ```kotlin
-private lateinit var mSpark: Spark
+private lateinit var _spark: Spark
 
 override fun onCreate(savedInstanceState: Bundle?) {
-    // ...
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
 
-    mSpark = Spark.Builder()
-            .setView(frameLayout) // View or view group
-            .setDuration(4000)
-            .setAnimList(Spark.ANIM_GREEN_PURPLE)
-            .build()
-
+    _spark = Spark(frameLayout, Spark.ANIM_GREEN_PURPLE, 4000)
+    _spark.startAnimation()
 }
 
-override fun onResume() {
-    // ...
-    mSpark.startAnimation()
-}
+override fun onDestroy() {
+    super.onDestroy()
 
-override fun onPause() {
-    // ...
-    mSpark.stopAnimation()
+    _spark.stopAnimation()
 }
 ```
 
 ## Installation
 ### Gradle
-+ Add the JitPack repository to your **root** `build.gradle` file:
-
-```gradle
-repositories {
-    maven { url "https://jitpack.io" }
-}
-```
-
-+ Add the code to your **module**'s `build.gradle` file:
-
 ```gradle
 dependencies {
     implementation 'io.github.tonnyl:spark:x.y.z'
@@ -64,6 +47,8 @@ dependencies {
 ```
 
 ## Custom Gradient Colors
+Spark has 3 built-in animation-lists, and you can custom your owns.
+
 ### Create gradient drawables
 `purple_drawable.xml`
 
@@ -122,10 +107,11 @@ dependencies {
 
 ### Apply Your Custom Animation List
 ```kotlin
-mSpark = Spark.Builder()
-        // ...
-        .setAnimList(R.drawable.custom_anim_list) // Your custom animation 
-        // ...
+_spark = Spark(
+    frameLayout,
+    R.drawable.your_custom_anim_list, // Your custom animation
+    4000
+)
 ```
 
 ## Thanks
