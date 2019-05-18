@@ -2,23 +2,17 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-def configuration = rootProject.ext.configuration
-def libraries = rootProject.ext.libraries
-
 android {
-    compileSdkVersion configuration.compileSdkVersion
-    buildToolsVersion configuration.buildToolsVersion
+    compileSdkVersion versions.compile_sdk
 
     defaultConfig {
         applicationId "io.github.tonnyl.sparksample"
 
-        minSdkVersion configuration.minSdkVersion
-        targetSdkVersion configuration.targetSdkVersion
+        minSdkVersion versions.min_sdk
+        targetSdkVersion versions.target_sdk
 
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -32,12 +26,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':spark')
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:${libraries.supportLibraryVersion}"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-
-    testImplementation "junit:junit:${libraries.junitVersion}"
-
-    androidTestImplementation "com.android.support.test:runner:${libraries.androidTestRunnerRulesVersion}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:${libraries.espressoVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+    implementation "androidx.appcompat:appcompat:${versions.app_compat}"
 }
